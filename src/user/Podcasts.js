@@ -8,7 +8,7 @@ const Podcasts = () => {
   const [filteredPodcasts, setFilteredPodcasts] = useState([]);
   const [currentpodcast, setCurrentpodcast] = useState();
   const [podname, setPodname] = useState();
-  const api = "https://podcastbackend.onrender.com/";
+  const api = "https://podbackend-production.up.railway.app/";
 
   //function to search
   const handleSearch = (e) => {
