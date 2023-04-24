@@ -9,11 +9,9 @@ import Admindashboard from "./user/Admindashboard";
 import Podcasts from "./user/Podcasts";
 import PrivateRoute from "./auth/PrivateRoutes";
 import Player from "./user/Player";
-import Menu from "./core/Menu";
 const AllRoutes = () => {
   return (
     <BrowserRouter>
-       <Menu></Menu>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />

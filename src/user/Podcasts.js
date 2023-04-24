@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllPodcasts } from "../admin/helper/adminapicalls";
 import image from "../images/podcast.jpg";
 import Player from "./Player";
-
+import Menu from "../core/Menu";
 const Podcasts = () => {
   const [podcasts, setPodcasts] = useState([]);
   const [filteredPodcasts, setFilteredPodcasts] = useState([]);
@@ -46,6 +46,7 @@ const Podcasts = () => {
 
   return (
     <>
+      <Menu />
       <div className="container px-3 mt-5">
         <h5>Search for your Favourite podcasts : </h5>
         <div className="row">

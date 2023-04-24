@@ -3,6 +3,8 @@ import { isAuthenticated } from "../auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createPodcast } from "../admin/helper/adminapicalls";
+import Menu from "../core/Menu";
+
 
 const Admindashboard = () => {
   const { user, token } = isAuthenticated();
@@ -69,7 +71,7 @@ const Admindashboard = () => {
 
   return (
     <div>
-     
+     <Menu />
       <h1 className="h3 text-center mt-3">Welcome to the admin Dashboard</h1>
       <form  method="post" encType="multipart/form-data" className="col-md-6 mx-auto">
         <div className="p-2">
