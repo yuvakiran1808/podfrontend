@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Menu from "../core/Menu";
 import { isAuthenticated } from "../auth";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { createPodcast } from "../admin/helper/adminapicalls";
 
 const Admindashboard = () => {
@@ -20,12 +20,12 @@ const Admindashboard = () => {
 
   const { name, description, speaker, category, type} = values;
 
-  
+  //function to update files
   const handleChangeFile = (event)=>{
     console.log(event);
      setFile(event.target.files[0]);
   }
-
+//function to update values
   const handleChange = (name) => (event) => {
      setValues({ ...values,[name] : event.target.value});
   };
@@ -36,7 +36,11 @@ const Admindashboard = () => {
   const onSubmitHandler = (event) => {
     console.log("hello")
     event.preventDefault();
-
+    toast("The file is uploading this will take some time", {
+      type: "success",
+      theme: "dark",
+      toastId: "1",
+    })
     const formData = new FormData();
     formData.append("name",name);
     formData.append("description",description);
@@ -65,7 +69,7 @@ const Admindashboard = () => {
 
   return (
     <div>
-      <Menu />
+     
       <h1 className="h3 text-center mt-3">Welcome to the admin Dashboard</h1>
       <form  method="post" encType="multipart/form-data" className="col-md-6 mx-auto">
         <div className="p-2">
@@ -158,6 +162,7 @@ const Admindashboard = () => {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };

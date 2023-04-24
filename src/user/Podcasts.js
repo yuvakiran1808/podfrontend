@@ -1,31 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { getAllPodcasts } from "../admin/helper/adminapicalls";
-import Menu from "../core/Menu";
-
 import image from "../images/podcast.jpg";
 import Player from "./Player";
 
 const Podcasts = () => {
-  
   const [podcasts, setPodcasts] = useState([]);
   const [filteredPodcasts, setFilteredPodcasts] = useState([]);
   const [currentpodcast, setCurrentpodcast] = useState();
   const [podname, setPodname] = useState();
   const api = "https://podcastbackend.onrender.com/";
-  
+
+  //function to search
   const handleSearch = (e) => {
-    
     if (e.target.value.trim() === "") {
       setFilteredPodcasts(podcasts);
     } else {
-       const searchedItems = podcasts.filter((eachpodcast) =>
+      const searchedItems = podcasts.filter((eachpodcast) =>
         eachpodcast.name.toLowerCase().includes(e.target.value.toLowerCase())
       );
       setFilteredPodcasts(searchedItems);
     }
   };
 
-
+  //function to load all podcasts
   const loadAllPodcasts = () => {
     getAllPodcasts().then((data) => {
       if (!data.error) {
@@ -41,6 +38,7 @@ const Podcasts = () => {
     loadAllPodcasts();
   }, []);
 
+  //to set current podcast
   const onclickhandler = (e) => {
     setCurrentpodcast(e.audio);
     setPodname(e.name);
@@ -48,8 +46,6 @@ const Podcasts = () => {
 
   return (
     <>
-      <Menu />
-      
       <div className="container px-3 mt-5">
         <h5>Search for your Favourite podcasts : </h5>
         <div className="row">
@@ -64,7 +60,11 @@ const Podcasts = () => {
         </div>
         <div className="row">
           <div className="text-center mb-4">
-            <Player api={api} currentpodcast={currentpodcast} podname = {podname} />
+            <Player
+              api={api}
+              currentpodcast={currentpodcast}
+              podname={podname}
+            />
           </div>
           <h1 className="h3 text-center mt-3">Audio Podcasts</h1>
 
@@ -140,12 +140,12 @@ const Podcasts = () => {
           })}
         </div>
         <div className="row">
-          
           <h1 className="h4 text-center mt-3">Popular Audio Podcasts</h1>
 
           {filteredPodcasts.map((podcast, index) => {
             return (
-              podcast.audio !== "" && podcast.ispopular&& (
+              podcast.audio !== "" &&
+              podcast.ispopular && (
                 <div className="col-md-4" key={index}>
                   <div className="card mb-3">
                     <img
@@ -186,10 +186,11 @@ const Podcasts = () => {
           })}
         </div>
         <div className="row">
-          <h1 className="h4 text-center mt-3 mb-3">popular video Podcasts</h1>
+          <h1 className="h4 text-center mt-3 mb-3">Popular video Podcasts</h1>
           {filteredPodcasts.map((podcast, index) => {
             return (
-              podcast.audio === "" && podcast.ispopular &&(
+              podcast.audio === "" &&
+              podcast.ispopular && (
                 <div className="col-md-4" key={index}>
                   <div className="card mb-3">
                     <video src={`${api}${podcast.video}`} controls></video>
