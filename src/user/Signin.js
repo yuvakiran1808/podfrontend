@@ -102,7 +102,7 @@ const Signin = () => {
             className="form-control border border-dark py-2"
             id="pass"
             required
-            onChange={onSubmitHandler}
+            onChange={onChangeHandler("password")}
           />
         </div>
         <div className="mt-3 text-center">
