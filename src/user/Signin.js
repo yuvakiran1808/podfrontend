@@ -98,7 +98,7 @@ const Signin = () => {
           </label>
           <input
             type="password"
-            placeholder="password"
+            placeholder="password should be atleast 5 characters"
             className="form-control border border-dark py-2"
             id="pass"
             required
