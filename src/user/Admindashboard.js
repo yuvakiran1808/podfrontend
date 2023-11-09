@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { createPodcast } from "../admin/helper/adminapicalls";
 import Menu from "../core/Menu";
 
-
 const Admindashboard = () => {
   const { user, token } = isAuthenticated();
 
@@ -17,44 +16,40 @@ const Admindashboard = () => {
     type: "",
   });
 
-  const [file,setFile] = useState(null);
+  const [file, setFile] = useState(null);
 
-
-  const { name, description, speaker, category, type} = values;
+  const { name, description, speaker, category, type } = values;
 
   //function to update files
-  const handleChangeFile = (event)=>{
+  const handleChangeFile = (event) => {
     console.log(event);
-     setFile(event.target.files[0]);
-  }
-//function to update values
-  const handleChange = (name) => (event) => {
-     setValues({ ...values,[name] : event.target.value});
+    setFile(event.target.files[0]);
   };
-
-
+  //function to update values
+  const handleChange = (name) => (event) => {
+    setValues({ ...values, [name]: event.target.value });
+  };
 
   // submithandler
   const onSubmitHandler = (event) => {
-    console.log("hello")
+    console.log("hello");
     event.preventDefault();
     toast("The file is uploading this will take some time", {
       type: "success",
       theme: "dark",
       toastId: "1",
-    })
+    });
     const formData = new FormData();
-    formData.append("name",name);
-    formData.append("description",description);
-    formData.append("speaker",speaker);
-    formData.append("category",category);
-    formData.append("type",type);
-    formData.append("video",file);
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("speaker", speaker);
+    formData.append("category", category);
+    formData.append("type", type);
+    formData.append("video", file);
 
-    setValues({...values,error : ""});
+    setValues({ ...values, error: "" });
     createPodcast(user._id, token, formData).then((data) => {
       if (data.error) {
-       
         setValues({ ...values, error: data.error });
       } else {
         setValues({
@@ -63,7 +58,7 @@ const Admindashboard = () => {
           speaker: "",
           category: "",
           type: "",
-          media:"",
+          media: "",
         });
       }
     });
@@ -71,9 +66,13 @@ const Admindashboard = () => {
 
   return (
     <div>
-     <Menu />
+      <Menu />
       <h1 className="h3 text-center mt-3">Welcome to the admin Dashboard</h1>
-      <form  method="post" encType="multipart/form-data" className="col-md-6 mx-auto">
+      <form
+        method="post"
+        encType="multipart/form-data"
+        className="col-md-6 mx-auto"
+      >
         <div className="p-2">
           <label htmlFor="email" className="py-2 h6">
             Enter podcast name:
@@ -109,7 +108,7 @@ const Admindashboard = () => {
           </label>
           <input
             type="text"
-            name = "speaker"
+            name="speaker"
             placeholder="speaker"
             className="form-control border border-dark py-2"
             id="speaker"
@@ -119,20 +118,27 @@ const Admindashboard = () => {
           />
         </div>
         <div className="p-2">
-          <label htmlFor="email" className="py-2 h6">
-            Enter podcast category:
+          <label htmlFor="category" className="py-2 h6">
+            Select podcast category:
           </label>
-          <input
-            type="text"
-            name = "category"
-            placeholder="category"
+          <select
+            name="category"
+            id="category"
             className="form-control border border-dark py-2"
-            id="speaker"
             required
             onChange={handleChange("category")}
             value={category}
-          />
+          >
+            <option value="">Choose a category</option>
+            <option value="Technology">Technology</option>
+            <option value="Science">Science</option>
+            <option value="Education">Education</option>
+            <option value="Sports">Sports</option>
+            <option value="History">History</option>
+            {/* Add more category options as needed */}
+          </select>
         </div>
+
         <div className="p-2">
           <label htmlFor="email" className="py-2 h6">
             Enter podcast type:
@@ -140,7 +146,7 @@ const Admindashboard = () => {
           <input
             type="text"
             name="type"
-            placeholder="type"
+            placeholder="podcast type"
             className="form-control border border-dark py-2"
             id="speaker"
             required

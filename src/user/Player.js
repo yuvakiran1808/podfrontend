@@ -29,6 +29,12 @@ const Player = ({api,currentpodcast,podname}) => {
     setIsPlaying(!isPlaying);
   };
 
+  const onDragHandler = (e)=>{
+    audioRef.current.currentTime = e.target.value;
+    setSongInfo({...songInfo,CurrentTime : e.target.value});
+
+  }
+
   const getTime = (time)=>{
     return(
     Math.floor(time/60)+ ":" + ("0" + Math.floor(time % 60)).slice(-2)
@@ -53,6 +59,7 @@ const Player = ({api,currentpodcast,podname}) => {
         value={songInfo.currentTime}
         className="form-range w-100 mb-3"
         step="0.5"
+        onChange={onDragHandler}
         readOnly
       />
       <p>{songInfo.duration?getTime(songInfo.duration):"0:00"}</p>
