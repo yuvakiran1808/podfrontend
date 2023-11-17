@@ -106,9 +106,9 @@ const Podcasts = () => {
                 <option value="">Select a category</option>
                 <option value="Technology">Technology</option>
                 <option value="Science">Science</option>
-                <option value="Science">Education</option>
-                <option value="Science">History</option>
-                <option value="Science">Sports</option>
+                <option value="Education">Education</option>
+                <option value="History">History</option>
+                <option value="Sports">Sports</option>
                 {/* Add more category options as needed */}
               </select>
             </div>
