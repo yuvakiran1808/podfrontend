@@ -14,7 +14,7 @@ const Podcasts = () => {
   const [filteredPodcasts, setFilteredPodcasts] = useState([]);
   const [currentpodcast, setCurrentpodcast] = useState();
   const [podname, setPodname] = useState();
-  const api = "https://podcastplayerapp.cyclic.app/";
+  const api = "https://podbackend-production.up.railway.app/";
   // const [favoritePodcasts, setFavoritePodcasts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
 
